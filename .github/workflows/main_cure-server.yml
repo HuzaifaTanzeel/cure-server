@@ -34,8 +34,8 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'productionn'
-      url: 'cure-server-productionn.azurewebsites.net'
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
 
@@ -57,6 +57,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'cure-server'
-          slot-name: 'productionn'
+          slot-name: 'Production'
           package: '*.jar'
           
