@@ -1,4 +1,4 @@
-# cure-server
+<img width="1440" height="1708" alt="image" src="https://github.com/user-attachments/assets/74770798-3e56-4636-89e8-abd028913da5" /><img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/31d61aa9-b090-4ab6-b5b1-2f0be9bab3cf" /># cure-server
 
 Healthcare REST API — Spring Boot · Java 17 · SQL Server
 
@@ -6,176 +6,45 @@ Healthcare REST API — Spring Boot · Java 17 · SQL Server
 
 ## System overview
 
-```mermaid
-flowchart TB
-  subgraph clients [Clients]
-    WebApp[Web / Mobile Client]
-  end
-
-  subgraph api [cure-server]
-    REST[REST Controllers]
-    SVC[Service Layer]
-    JPA[Spring Data JPA]
-    REST --> SVC --> JPA
-  end
-
-  subgraph external [External Services]
-    DB[(SQL Server)]
-    SMTP[Gmail SMTP]
-  end
-
-  WebApp -->|HTTPS| REST
-  JPA --> DB
-  SVC -->|OTP Email| SMTP
-```
+<img width="1440" height="960" alt="image" src="https://github.com/user-attachments/assets/05c3d690-3027-4265-a3a8-dcee7fba614a" />
 
 ---
 
 ## Layered architecture
 
-```mermaid
-flowchart LR
-  subgraph presentation [Presentation]
-    C[Controllers]
-    DTO[DTOs]
-  end
-
-  subgraph business [Business]
-    S[Services]
-    M[Mappers / ModelMapper]
-  end
-
-  subgraph persistence [Persistence]
-    R[Repositories]
-    E[JPA Entities]
-  end
-
-  C --> DTO
-  C --> S
-  S --> M
-  S --> R
-  R --> E
-```
+<img width="1440" height="600" alt="image" src="https://github.com/user-attachments/assets/0a13ad43-dd31-4a35-a470-123fc1be84a7" />
 
 ---
 
 ## Domain modules
 
-```mermaid
-flowchart TB
-  CF[CommonFramework]
-
-  CF --> Auth[Auth & UAM]
-  CF --> Party[Party / Practitioner]
-  CF --> Org[Facility & Practice]
-  CF --> Addr[Address Lookups]
-
-  CF --> Patient[Patient Module]
-  Patient --> MH[Medical History]
-  Patient --> Allergy[Allergies]
-
-  CF --> Clinical[Clinical Module]
-  Clinical --> Enc[Encounters]
-  Clinical --> Appt[Appointments]
-  Clinical --> Sched[Scheduling]
-  Clinical --> Dx[Diagnosis]
-  Clinical --> Med[Medications]
-  Clinical --> Obs[LOINC / Observations]
-```
+<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/d5c52a33-346a-4339-8cf9-a655d665127f" />
 
 ---
 
 ## API surface
 
-```mermaid
-flowchart LR
-  subgraph routes [REST Endpoints]
-    P["/practitioner"]
-    L["/authenticateUser"]
-    PT["/api/Patient"]
-    EN["/api/Encounter"]
-    F["/facility"]
-    PR["/practice"]
-    T["/types"]
-  end
+<img width="1440" height="1708" alt="image" src="https://github.com/user-attachments/assets/8252d320-b89a-40cc-b942-330f317d7714" />
 
-  P --> Reg[Registration + OTP]
-  P --> Geo[Countries / Provinces / Cities]
-  L --> Login[User Authentication]
-  PT --> Hist[Allergies · Family · Social · Surgical History]
-  EN --> Care[Diagnosis · Meds · Procedures · Appointments]
-  F --> Fac[Facility Management]
-  PR --> Prac[Practice Management]
-```
 
 ---
 
 ## Practitioner onboarding
 
-```mermaid
-sequenceDiagram
-  participant Client
-  participant API as cure-server
-  participant DB as SQL Server
-  participant Mail as Gmail SMTP
-
-  Client->>API: POST /practitioner/create
-  API->>DB: Persist registration request
-  API->>Mail: Send OTP
-  API-->>Client: requestId
-
-  Client->>API: POST /practitioner/validate-otp
-  API->>DB: Verify OTP
-  API-->>Client: Validated
-
-  Client->>API: POST /authenticateUser
-  API->>DB: Authenticate credentials
-  API-->>Client: UserLoginDTO
-```
+<img width="1440" height="1250" alt="image" src="https://github.com/user-attachments/assets/bac85ce8-987f-4fc8-89cb-352952005b1f" />
 
 ---
 
 ## Clinical encounter flow
 
-```mermaid
-flowchart TD
-  A[Schedule Availability] --> B[Create Appointment]
-  B --> C[Create Encounter]
-  C --> D[Record Diagnosis]
-  C --> E[Service Requests]
-  C --> F[Medication Requests]
-  C --> G[Clinical Procedures]
-  D --> H[Patient Record Updated]
-  E --> H
-  F --> H
-  G --> H
-```
+<img width="1440" height="960" alt="image" src="https://github.com/user-attachments/assets/dd30a8ae-87d9-46d4-9bf0-97678a0758a2" />
 
 ---
 
 ## Deployment
 
-```mermaid
-flowchart TB
-  subgraph cicd [CI/CD]
-    GH[GitHub Push]
-    GA[GitHub Actions]
-    GH --> GA
-    GA -->|mvn clean install| JAR[Spring Boot JAR]
-  end
+<img width="1440" height="1040" alt="image" src="https://github.com/user-attachments/assets/a3943e08-4db9-4a6d-8a99-38129af2ebdd" />
 
-  subgraph prod [Production]
-    JAR --> Azure[Azure Web App]
-    Azure --> AzureDB[(Azure SQL)]
-  end
-
-  subgraph local [Local Dev]
-    DC[Docker Compose]
-    DC --> App[cure-server]
-    DC --> MSSQL[(SQL Server 2022)]
-    App --> MSSQL
-  end
-```
 
 ---
 
