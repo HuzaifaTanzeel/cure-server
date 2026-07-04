@@ -1,9 +1,3 @@
-<img width="1440" height="1708" alt="image" src="https://github.com/user-attachments/assets/74770798-3e56-4636-89e8-abd028913da5" /><img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/31d61aa9-b090-4ab6-b5b1-2f0be9bab3cf" /># cure-server
-
-Healthcare REST API — Spring Boot · Java 17 · SQL Server
-
----
-
 ## System overview
 
 <img width="1440" height="960" alt="image" src="https://github.com/user-attachments/assets/05c3d690-3027-4265-a3a8-dcee7fba614a" />
